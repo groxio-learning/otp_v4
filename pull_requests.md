@@ -1,4 +1,2 @@
 - Bruce Tate
-- your name
-- another name
-- ...
+- Victor Lorenzo Soleri

@@ -20,9 +20,9 @@ defmodule Accountant.Core.FingerTrapTest do
       assert FingerTrap.new(524_288) |> Enum.count() == 524_288
     end
 
-    test "raises if given negative integer"
-    test "creates a new finger trap with zero elements"
-    test "handles string input"
+    # test "raises if given negative integer"
+    # test "creates a new finger trap with zero elements"
+    # test "handles string input"
   end
 
   describe "incrementing" do

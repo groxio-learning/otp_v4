@@ -1,5 +1,3 @@
 - Bruce Tate
 - Jacob Arellano
-- your name
-- another name
-- ...
+- Victor Lorenzo Soleri

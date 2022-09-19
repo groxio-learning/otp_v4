@@ -1,3 +1,4 @@
 - Bruce Tate
 - Jacob Arellano
 - Victor Lorenzo Soleri
+- Oscar Amado

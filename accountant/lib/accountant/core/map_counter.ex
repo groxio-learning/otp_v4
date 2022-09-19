@@ -1,18 +1,20 @@
 defmodule Accountant.Core.MapCounter do
+  defstruct [:count]
+
   def new(value) do
     count = String.to_integer(value)
-    %{count: count}
+    %__MODULE__{count: count}
   end
 
-  def inc(%{count: count} = acc) do
+  def inc(%__MODULE__{count: count} = acc) do
     %{acc | count: count + 1}
   end
 
-  def dec(%{count: count} = acc) do
+  def dec(%__MODULE__{count: count} = acc) do
     %{acc | count: count - 1}
   end
 
-  def show(%{count: count}) do
+  def show(%__MODULE__{count: count}) do
     "The count is: #{count}"
   end
 end

@@ -1,4 +1,4 @@
-defmodule Accountant.Application do
+defmodule Enforcer.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,14 +8,13 @@ defmodule Accountant.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Accountant.Worker.start_link(arg)
-      # {Accountant.Worker, arg}
-      {Accountant.Server, "42"}
+      # Starts a worker by calling: Enforcer.Worker.start_link(arg)
+      # {Enforcer.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Accountant.Supervisor]
+    opts = [strategy: :one_for_one, name: Enforcer.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

@@ -1,4 +1,5 @@
 defmodule Enforcer.Game.Board do
+  alias Enforcer.Game.Score
   defstruct [:answer, guesses: []]
 
   def new(answer) do
@@ -10,28 +11,36 @@ defmodule Enforcer.Game.Board do
   end
 
   def get_status(board) do
-    last_turn = List.first(board.guesses)
-
-    if length(board.guesses) == 10 do
-      "LOSE"
+    cond do
+      won?(board) -> "WON"
+      lost?(board) -> "LOST"
+      true -> "PLAYING"
     end
+  end
 
-    if last_turn == board.answer do
-      "WIN"
-    end
+  defp won?(%{answer: a, guesses: [a | _guesses]}) do
+    true
+  end
 
-    "PLAYING"
+  defp won?(_board), do: false
+
+  defp lost?(board) do
+    length(board.guesses) >= 10
+  end
+
+  defp show_row(answer, guess) do
+    "#{Enum.join(guess, " ")} | #{Score.check(answer, guess)}"
+  end
+
+  defp show_rows(board) do
+    Enum.join(Enum.map(board.guesses, &show_row(board.answer, &1)), "\n")
   end
 
   def show(board) do
     """
-      1 2 3 4 | RRWW
-      1 2 3 4 | RRWW
-      1 2 3 4 | RRWW
-      1 2 3 4 | RRWW
-      1 2 3 4 | RRWW
+      #{show_rows(board)}
 
-      Status: PLAYING/WIN/LOSE
+      Status: #{get_status(board)}
     """
   end
 

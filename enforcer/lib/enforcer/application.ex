@@ -10,6 +10,7 @@ defmodule Enforcer.Application do
     children = [
       # Starts a worker by calling: Enforcer.Worker.start_link(arg)
       # {Enforcer.Worker, arg}
+      Enforcer.Game
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

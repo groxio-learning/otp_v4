@@ -1,5 +1,4 @@
 defmodule Enforcer.Game.Board do
-  alias Enforcer.Game.Score
   defstruct [:answer, guesses: []]
 
   def new(answer) do
@@ -12,9 +11,9 @@ defmodule Enforcer.Game.Board do
 
   def get_status(board) do
     cond do
-      won?(board) -> "WON"
-      lost?(board) -> "LOST"
-      true -> "PLAYING"
+      won?(board) -> :won
+      lost?(board) -> :lost
+      true -> :playing
     end
   end
 
@@ -26,22 +25,6 @@ defmodule Enforcer.Game.Board do
 
   defp lost?(board) do
     length(board.guesses) >= 10
-  end
-
-  defp show_row(answer, guess) do
-    "#{Enum.join(guess, " ")} | #{Score.check(answer, guess)}"
-  end
-
-  defp show_rows(board) do
-    Enum.join(Enum.map(board.guesses, &show_row(board.answer, &1)), "\n")
-  end
-
-  def show(board) do
-    """
-      #{show_rows(board)}
-
-      Status: #{get_status(board)}
-    """
   end
 
   defp random_answer() do

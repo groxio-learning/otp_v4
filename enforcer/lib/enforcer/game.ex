@@ -3,6 +3,7 @@ defmodule Enforcer.Game do
   alias Enforcer.Game.{Board, ScoreBoard}
 
   def start_link(name) do
+    IO.puts("Starting #{name}")
     GenServer.start_link(__MODULE__, nil, name: name)
   end
 
@@ -12,8 +13,18 @@ defmodule Enforcer.Game do
     |> IO.puts()
   end
 
+  def child_spec(name) do
+    IO.puts("child_spec with a name #{name}")
+
+    %{
+      id: name,
+      start: {__MODULE__, :start_link, [name]}
+    }
+  end
+
   @impl GenServer
   def init(answer) do
+    IO.puts("Initialize")
     {:ok, Board.new(answer)}
   end
 

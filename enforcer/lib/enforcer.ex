@@ -1,18 +1,9 @@
 defmodule Enforcer do
-  @moduledoc """
-  Documentation for `Enforcer`.
-  """
+  alias Enforcer.Game
 
-  @doc """
-  Hello world.
+  def play(name),
+    do: DynamicSupervisor.start_child(:deadpool, {Game, name})
 
-  ## Examples
-
-      iex> Enforcer.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def guess(name, turn),
+    do: Game.guess(name, turn)
 end

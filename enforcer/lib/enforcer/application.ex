@@ -8,15 +8,14 @@ defmodule Enforcer.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Enforcer.Game, :superman},
-      {Enforcer.Game, :ironman}
+      {DynamicSupervisor, strategy: :one_for_one, name: :deadpool}
     ]
 
     IO.puts("Starting application")
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: :sup]
+    opts = [strategy: :rest_for_one, name: :sup]
     Supervisor.start_link(children, opts)
   end
 end

@@ -18,6 +18,10 @@ defmodule Accountant.Server do
     GenServer.cast(server, :dec)
   end
 
+  def boom(server) do
+    GenServer.cast(server, :boom)
+  end
+
   def show(server) do
     GenServer.call(server, :show)
   end
@@ -34,6 +38,13 @@ defmodule Accountant.Server do
     show_value = MapCounter.show(state)
 
     {:reply, show_value, state}
+  end
+
+  @impl GenServer
+  def handle_cast(:boom, state) do
+    raise "booom!!!!"
+
+    {:noreply, state}
   end
 
   @impl GenServer

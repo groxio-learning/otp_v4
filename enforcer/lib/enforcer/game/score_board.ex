@@ -15,6 +15,5 @@ defmodule Enforcer.Game.ScoreBoard do
 
       Status: #{status}
     """
-    |> IO.puts()
   end
 end
